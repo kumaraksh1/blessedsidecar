@@ -24,28 +24,25 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Create and start virtual environment
+      - name: Set up Python, create venv, and install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
-      
-      - name: Install dependencies
-        run: |
-          source venv/bin/activate
           pip install -r ./router-app/requirements.txt
-        
+      
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-
       - name: Zip artifact for deployment
-        run: zip release.zip ./router-app/* -r
+        run: |
+          cd router-app
+          zip -r ../release.zip . -x "venv/*"
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
           path: |
-            release.zip
-            !venv/
+        release.zip
+        !venv/
       
       - name: Log in to container registry
         uses: docker/login-action@v2
@@ -93,14 +90,14 @@ jobs:
         with:
           app-name: 'blessedsidecar'
           slot-name: 'Production'
-          blessed-app-sitecontainers: true
-          sitecontainers-config: >-
-            [
-              {
-                "name": "hello-app",
-                "image": "sitecontainerssampleacr.azurecr.io/sitecontainerssampleacr/test/hello-app:${{ github.sha }}",
-                "targetPort": 5001,
-                "isMain": false
-              }
-            ]
+          # blessed-app-sitecontainers: true
+          # sitecontainers-config: >-
+          #   [
+          #     {
+          #       "name": "hello-app",
+          #       "image": "sitecontainerssampleacr.azurecr.io/sitecontainerssampleacr/test/hello-app:${{ github.sha }}",
+          #       "targetPort": 5001,
+          #       "isMain": false
+          #     }
+          #   ]
           
