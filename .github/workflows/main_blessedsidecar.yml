@@ -41,8 +41,8 @@ jobs:
         with:
           name: python-app
           path: |
-        release.zip
-        !venv/
+            release.zip
+            !venv/
       
       - name: Log in to container registry
         uses: docker/login-action@v2
