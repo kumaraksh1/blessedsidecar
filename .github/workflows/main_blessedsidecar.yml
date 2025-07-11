@@ -90,14 +90,14 @@ jobs:
         with:
           app-name: 'blessedsidecar'
           slot-name: 'Production'
-          # blessed-app-sitecontainers: true
-          # sitecontainers-config: >-
-          #   [
-          #     {
-          #       "name": "hello-app",
-          #       "image": "sitecontainerssampleacr.azurecr.io/sitecontainerssampleacr/test/hello-app:${{ github.sha }}",
-          #       "targetPort": 5001,
-          #       "isMain": false
-          #     }
-          #   ]
+          blessed-app-sitecontainers: true
+          sitecontainers-config: >-
+            [
+              {
+                "name": "hello-app",
+                "image": "sitecontainerssampleacr.azurecr.io/sitecontainerssampleacr/test/hello-app:${{ github.sha }}",
+                "targetPort": 5001,
+                "isMain": false
+              }
+            ]
           
