@@ -85,7 +85,7 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_F17024D5551C4BAD9A075B1DBB57726C }}
 
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@releasesv3-sidecar-test-withblessed
+        uses: azure/webapps-deploy@sidecar-testing-release
         id: deploy-to-webapp
         with:
           app-name: 'blessedsidecar'
