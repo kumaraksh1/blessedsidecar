@@ -44,20 +44,20 @@ jobs:
             release.zip
             !venv/
       
-      - name: Log in to container registry
-        uses: docker/login-action@v2
-        with:
-          registry: sitecontainerssampleacr.azurecr.io/
-          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A0CC9BC301454048B276D44640F4817D }}
-          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_D5DF9FCBBA0B44269C84675BD466AD75 }}
+      # - name: Log in to container registry
+      #   uses: docker/login-action@v2
+      #   with:
+      #     registry: sitecontainerssampleacr.azurecr.io/
+      #     username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A0CC9BC301454048B276D44640F4817D }}
+      #     password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_D5DF9FCBBA0B44269C84675BD466AD75 }}
 
-      - name: Build and push container hello-app image to registry
-        uses: docker/build-push-action@v3
-        with:
-          context: ./hello-app
-          push: true
-          tags: sitecontainerssampleacr.azurecr.io/sitecontainerssampleacr/test/hello-app:${{ github.sha }}
-          file: ./hello-app/Dockerfile
+      # - name: Build and push container hello-app image to registry
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     context: ./hello-app
+      #     push: true
+      #     tags: sitecontainerssampleacr.azurecr.io/sitecontainerssampleacr/test/hello-app:${{ github.sha }}
+      #     file: ./hello-app/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
@@ -90,16 +90,17 @@ jobs:
         with:
           app-name: 'blessedsidecar'
           slot-name: 'Production'
-          blessed-app-sitecontainers: true
-          sitecontainers-config: >-
-            [
-              {
-                "name": "hello-app",
-                "image": "sitecontainerssampleacr.azurecr.io/sitecontainerssampleacr/test/hello-app:${{ github.sha }}",
-                "targetPort": 5001,
-                "isMain": false,
-                "volumeMounts": [{"containerMountPath": "abc", "data" : "def", "readOnly" : true, "volumeSubPath": "xyz"}],
-                "environmentVariables": [{"name": "testing", "value": "TestEnv"}]
-              }
-            ]
+          package: .
+          # blessed-app-sitecontainers: true
+          # sitecontainers-config: >-
+          #   [
+          #     {
+          #       "name": "hello-app",
+          #       "image": "sitecontainerssampleacr.azurecr.io/sitecontainerssampleacr/test/hello-app:${{ github.sha }}",
+          #       "targetPort": 5001,
+          #       "isMain": false,
+          #       "volumeMounts": [{"containerMountPath": "abc", "data" : "def", "readOnly" : true, "volumeSubPath": "xyz"}],
+          #       "environmentVariables": [{"name": "testing", "value": "TestEnv"}]
+          #     }
+          #   ]
           
