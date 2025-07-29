@@ -7,7 +7,7 @@ HELLO_APP_BASE_URL = "http://localhost:5001"
 
 @app.route('/', methods=['GET'])
 def home():
-    return jsonify({"message": "Hello, I am just a router and testing webhook with sidecar, and blessed scenario #fopefully final testing"})
+    return jsonify({"message": "Hello, I am just a router and testing webhook with sidecar, and blessed scenario final before release#fopefully final testing"})
 
 @app.route('/route', methods=['GET'])
 def route():
