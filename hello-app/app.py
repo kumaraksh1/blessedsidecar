@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/hello', methods=['GET'])
 def hello():
-    return jsonify({"message": "Hello from Hello App!, testing sidecar gha with blessed scenario #hopefully final testing2"})
+    return jsonify({"message": "Hello from Hello App!, testing sidecar gha with blessed scenario #hopefully final testing before release "})
 
 
 @app.route('/read-file', methods=['GET'])
