@@ -99,8 +99,8 @@ jobs:
                 "image": "sitecontainerssampleacr.azurecr.io/sitecontainerssampleacr/test/hello-app:${{ github.sha }}",
                 "targetPort": 5001,
                 "isMain": false,
-                "volumeMounts": [{"containerMountPath": "abc", "data" : "def", "readOnly" : true, "volumeSubPath": "xyz"}],
-                "environmentVariables": [{"name": "testing", "value": "TestEnv"}]
+                 "environmentVariables": [{"name": "testing", "value": "TestEnv"}]
+                "volumeMounts": [{"containerMountPath": "abc", "data" : "def", "readOnly" : true, "volumeSubPath": "xyz"}]
               }
             ]
           
