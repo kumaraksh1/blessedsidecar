@@ -34,15 +34,13 @@ jobs:
       - name: Zip artifact for deployment
         run: |
           cd router-app
-          zip -r ../release.zip . -x "venv/*"
+          zip ../release.zip ./* -r
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            release.zip
-            !venv/
+          path: release.zip
       
       - name: Log in to container registry
         uses: docker/login-action@v2
